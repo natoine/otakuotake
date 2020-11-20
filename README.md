@@ -1,3 +1,3 @@
 # otakuotake
 
-Un projet avec le cousin
+Un projet avec le super cousin
