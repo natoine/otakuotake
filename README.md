@@ -1,3 +1,3 @@
 # otakuotake
 
-Un projet avec le cousin trop chaud
+Un projet avec le super cousin trop chaud
