@@ -1,0 +1,19 @@
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <h1>Bienvenue sur OtakuOtake</h1>
+
+        <span>
+            mon nom est : <span id="myname">personne</span>
+        </span>
+
+    </body>
+</html>
+
+<script>
+    var spantomodify = document.getElementById("myname");
+    fetch("/whatismyname").then(response => response.text().then(data => spantomodify.innerText = data));
+</script>

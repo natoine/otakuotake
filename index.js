@@ -6,10 +6,11 @@ const app = express();
 const port = process.env.PORT || 3000 ;
 var nbvisit = 0 ;
 
-app.get("/", function(request, response){
-    nbvisit ++ ;
-    console.log("c'est la " + nbvisit + "éme visite ");
-    response.send("hello tout va bien");
+//serves static files
+app.use(express.static('resources/public'));
+
+app.get("/whatismyname", function(request, response) {
+    response.send("Broly");
 })
 
 app.listen(port, function () {
