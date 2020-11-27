@@ -1,3 +1,3 @@
 # otakuotake
 
-Un projet avec le super cousin trop chaud
+C'est un projet basé sur node.js
