@@ -15,10 +15,14 @@ console.log("uri mongodb", urimongo);
 app.use(express.static('resources/public'));
 
 app.get("/whatismyname", function(request, response) {
-    mongodb.MongoClient.connect(urimongo, function (err, db) {
+    mongodb.MongoClient.connect(urimongo, { useUnifiedTopology: true }, function (err, client) {
         if(err) console.log("error" , err);
         else {
             console.log("connected !");
+            client.db("otakuotake").collection("supersayans").find().toArray(function(err, items) {
+                if(err) throw err;     
+                response.send(items[0].name);          
+            });
         }
     });
 });
