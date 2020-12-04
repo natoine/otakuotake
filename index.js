@@ -7,10 +7,8 @@ const port = process.env.PORT || 3000 ;
 var nbvisit = 0 ;
 
 const mongodb = require('mongodb');
-const dbuser = "username" ;
-const dbpass = "password";
 
-const urimongo = `mongodb://${dbuser}:${encodeURIComponent(dbpass)}@ds139341.mlab.com:39341/otakuotake`;
+const urimongo = require("./resources/secret/databaseconfig.js").url ;
 console.log("uri mongodb", urimongo);
 
 //serves static files
