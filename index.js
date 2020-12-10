@@ -20,8 +20,10 @@ app.get("/whatismyname", function(request, response) {
         else {
             console.log("connected !");
             client.db("otakuotake").collection("supersayans").find().toArray(function(err, items) {
-                if(err) throw err;     
-                response.send(items[0].name);          
+                if(err) throw err; 
+                var nb = Math.floor(Math.random()*2);
+                console.log("nb", nb);    
+                response.send(items[nb].name);          
             });
         }
     });
