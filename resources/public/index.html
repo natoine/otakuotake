@@ -1,19 +1,22 @@
 <html>
     <head>
-
+        <meta charset="utf-8">
+        <title>OtakuOtake</title>
+        <meta descr="un facematch DBZ">
+        <link rel="stylesheet" href="/css/main.css">
     </head>
 
     <body>
         <h1>Bienvenue sur OtakuOtake</h1>
 
-        <span>
-            mon nom est : <span id="myname">personne</span>
-        </span>
+        <main>
+            <div>
+                <img src="images/abo.jpg"></img>
+            </div>
+            <div>
+                <img src="images/avocado.jpg"></img>
+            </div>
+        </main>
 
     </body>
 </html>
-
-<script>
-    var spantomodify = document.getElementById("myname");
-    fetch("/whatismyname").then(response => response.text().then(data => spantomodify.innerText = data));
-</script>
