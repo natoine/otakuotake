@@ -1,12 +1,15 @@
 html, body {
     height: 100%;
-    background-color: white;
+    color: whitesmoke;
+    background-color: rgb(235, 106, 20);
     font-family: arial, sans-serif;
     font-size: 16px;
+    text-align:center;
   }
 
   main {
-    height: 100%;
+    height: 80%;
+    background-color: rgb(20, 95, 235);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -14,3 +17,10 @@ html, body {
     align-items: center;
     align-content: space-around;
   }
+
+  .character {
+    display: flex;
+    flex-direction: column;
+  }
+
+ 
