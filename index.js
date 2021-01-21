@@ -11,10 +11,12 @@ const urimongo = require("./resources/secret/databaseconfig.js").url ;
 
 var cors = require('cors');
 
+app.use(cors);
+
 //serves static files
 app.use(express.static('resources/public'));
 
-app.get("/get2randomcharacters", cors(), function(request, response) {
+app.get("/get2randomcharacters", function(request, response) {
     mongodb.MongoClient.connect(urimongo, { useUnifiedTopology: true }, function (err, client) {
         if(err) console.log("error" , err);
         else {
