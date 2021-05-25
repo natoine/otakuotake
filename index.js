@@ -48,7 +48,7 @@ app.get("/getrandomcharacter", function(request, response) {
     });
 });
 
-app.post( "/poll",function(request, response) {
+app.post("/poll", function(request, response) {
     //récupérer les données de la requête
     var body = request.body ;
     console.log("body", body);
