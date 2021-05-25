@@ -2,6 +2,8 @@
 
 const express = require('express');
 const app = express();
+const bodyParser   = require('body-parser');
+app.use(bodyParser.json());
 
 const port = process.env.PORT || 3000 ;
 
@@ -45,6 +47,17 @@ app.get("/getrandomcharacter", function(request, response) {
         }
     });
 });
+
+app.post( "/poll",function(request, response) {
+    //récupérer les données de la requête
+    var body = request.body ;
+    console.log("body", body);
+    //pousser en base de données
+
+    //répondre ok tout va bien
+    response.status(200);
+    response.send("votre vote a été sauvegardé !");
+})
 
 app.listen(port, function () {
     console.log('Serveur listening on port ' + port);
