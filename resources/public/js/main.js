@@ -32,5 +32,8 @@ function postPoll(idwin, idloose) {
                       headers:{'Content-Type': 'application/json'}, 
                       mode:"cors", 
                       cache:'default'}).then(
-        function(response){ console.log(response);})
+        function(response){ 
+            console.log(response); 
+            window.location.reload();
+        })
 }
