@@ -23,4 +23,11 @@ html, body {
     flex-direction: column;
   }
 
+  .poll {
+    background-color: yellow;
+
+  }
+   .poll:hover {
+     background-color: orange;
+   }
  
