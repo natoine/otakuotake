@@ -5,6 +5,14 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
+const createCsvStringifier = require('csv-writer').createObjectCsvStringifier;
+const csvStringifierCharacters = createCsvStringifier({
+    header: [
+        {id: 'name', title:"NAME"},
+        {id: 'picture', title: "PICTURE"}
+    ]
+});
+
 const port = process.env.PORT || 3000;
 
 const mongodb = require('mongodb');
@@ -48,10 +56,9 @@ app.get("/getrandomcharacter", function (request, response) {
     });
 });
 
-app.post("/poll", function (request, response) {
+app.post("/poll", cors(), function (request, response) {
     //récupérer les données de la requête
     var body = request.body;
-    console.log("body", body);
     //pousser en base de données
     mongodb.MongoClient.connect(urimongo, { useUnifiedTopology: true }, function (err, client) {
         if (err) console.log("error", err);
@@ -66,6 +73,38 @@ app.post("/poll", function (request, response) {
     response.status(200);
     response.send("votre vote a été sauvegardé !");
 })
+
+
+//export de la base de données
+app.get("/exportdataset", function (request, response){
+    mongodb.MongoClient.connect(urimongo, { useUnifiedTopology: true }, function (err, client) {
+        if (err) console.log("error", err);
+        else {
+            client.db("otakuotake").collection("characters").find().toArray(function (err, items) {
+                if (err) throw err;
+               
+                response.format({
+                    'application/json': function () {
+                        response.setHeader('Content-disposition', 'attachment; filename=score.json'); //do nothing
+                        response.set('Content-Type', 'application/json');
+                        response.json(items);
+                      },
+                      'text/csv': function () {
+                        response.setHeader('Content-disposition', 'attachment; filename=score.csv'); //do nothing
+                        response.set('Content-Type', 'text/csv');
+                        let csv ;
+                        //build a CSV string with csv-writer
+                        csv = csvStringifierCharacters.getHeaderString().concat(csvStringifierCharacters.stringifyRecords(items));
+                        response.end(csv);
+                      }
+                });
+
+            });
+        }
+    });
+
+})
+
 
 app.listen(port, function () {
     console.log('Serveur listening on port ' + port);
