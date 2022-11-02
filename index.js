@@ -2,58 +2,66 @@
 
 const express = require('express');
 const app = express();
-const bodyParser   = require('body-parser');
+const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-const port = process.env.PORT || 3000 ;
+const port = process.env.PORT || 3000;
 
 const mongodb = require('mongodb');
 
-const urimongo = require("./resources/secret/databaseconfig.js").url ;
+const urimongo = require("./resources/secret/databaseconfig.js").url;
 
 var cors = require('cors');
 
 //serves static files
 app.use(express.static('resources/public'));
 
-app.get("/get2randomcharacters", cors(), function(request, response) {
+app.get("/get2randomcharacters", cors(), function (request, response) {
     mongodb.MongoClient.connect(urimongo, { useUnifiedTopology: true }, function (err, client) {
-        if(err) console.log("error" , err);
+        if (err) console.log("error", err);
         else {
-            client.db("otakuotake").collection("characters").find().toArray(function(err, items) {
-                if(err) throw err;
+            client.db("otakuotake").collection("characters").find().toArray(function (err, items) {
+                if (err) throw err;
                 var dblength = items.length;
-                var nb1 = Math.floor(Math.random()*dblength);
-                var nb2 = Math.floor(Math.random()*dblength);
-                while(nb2==nb1){
-                    nb2 = Math.floor(Math.random()*dblength);
+                var nb1 = Math.floor(Math.random() * dblength);
+                var nb2 = Math.floor(Math.random() * dblength);
+                while (nb2 == nb1) {
+                    nb2 = Math.floor(Math.random() * dblength);
                 }
-                response.send([items[nb1], items[nb2]]);          
+                response.send([items[nb1], items[nb2]]);
             });
         }
     });
 });
 
-app.get("/getrandomcharacter", function(request, response) {
+app.get("/getrandomcharacter", function (request, response) {
     mongodb.MongoClient.connect(urimongo, { useUnifiedTopology: true }, function (err, client) {
-        if(err) console.log("error" , err);
+        if (err) console.log("error", err);
         else {
-           client.db("otakuotake").collection("characters").find().toArray(function(err, items) {
-                if(err) throw err;
+            client.db("otakuotake").collection("characters").find().toArray(function (err, items) {
+                if (err) throw err;
                 var dblength = items.length;
-                var nb = Math.floor(Math.random()*dblength);
-                response.send(items[nb]);          
+                var nb = Math.floor(Math.random() * dblength);
+                response.send(items[nb]);
             });
         }
     });
 });
 
-app.post("/poll", function(request, response) {
+app.post("/poll", function (request, response) {
     //récupérer les données de la requête
-    var body = request.body ;
+    var body = request.body;
     console.log("body", body);
     //pousser en base de données
-
+    mongodb.MongoClient.connect(urimongo, { useUnifiedTopology: true }, function (err, client) {
+        if (err) console.log("error", err);
+        else {
+            try {client.db("otakuotake").collection("poll").insertOne(body);}
+             catch(error) {
+                throw err;
+             }
+        }
+    });
     //répondre ok tout va bien
     response.status(200);
     response.send("votre vote a été sauvegardé !");

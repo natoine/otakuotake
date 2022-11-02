@@ -33,7 +33,6 @@ function postPoll(idwin, idloose) {
                       mode:"cors", 
                       cache:'default'}).then(
         function(response){ 
-            console.log(response); 
             window.location.reload();
         })
 }
