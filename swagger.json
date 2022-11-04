@@ -17,7 +17,7 @@
         "description": "API for getting Dragon Ball Characters"
       }
     ],
-    "schemes": ["http"],
+    "schemes": ["https"],
     "consumes": ["application/json"],
     "produces": ["application/json"],
     "paths": {
