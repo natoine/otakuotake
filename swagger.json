@@ -1,0 +1,53 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Dragon Ball Face Match API",
+      "description": "My Dragon Ball Face Match API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "dragonballmatch.osc-fr1.scalingo.io",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Dragon Ball Face Match API",
+        "description": "API for getting Dragon Ball Characters"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/getrandomcharacter": {
+            "get": {
+                "tags": ["DBCharacters"],
+                "description": "get one random character in Dragon Ball Universe",
+                "produces": [
+                    "application/json"
+                  ],
+                  "responses": {
+                    "200": {
+                        "description": "get one random character"
+                    }
+                  }
+            }
+        },
+        "/get2randomcharacters": {
+            "get": {
+                "tags": ["DBCharacters"],
+                "description": "get two random characters in Dragon Ball Universe, ideal for a one on one fight",
+                "produces": [
+                    "application/json"
+                  ],
+                  "responses": {
+                    "200": {
+                        "description": "get two random characters"
+                    }
+                  }
+            }
+        }
+    }
+  }

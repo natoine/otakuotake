@@ -5,6 +5,9 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
+const swaggerUi = require('swagger-ui-express'),
+swaggerDocument = require('./swagger.json');
+
 const createCsvStringifier = require('csv-writer').createObjectCsvStringifier;
 const csvStringifierCharacters = createCsvStringifier({
     header: [
@@ -20,6 +23,9 @@ const mongodb = require('mongodb');
 const urimongo = require("./resources/secret/databaseconfig.js").url;
 
 var cors = require('cors');
+
+//to serve swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //serves static files
 app.use(express.static('resources/public'));
@@ -51,9 +57,12 @@ app.get("/getrandomcharacter", function (request, response) {
                 var dblength = items.length;
                 var nb = Math.floor(Math.random() * dblength);
                 response.send(items[nb]);
+                console.log("response sent");
             });
         }
+        console.log("getrandomchar over");
     });
+    console.log("getrandomchar really over ?");
 });
 
 app.post("/poll", cors(), function (request, response) {
