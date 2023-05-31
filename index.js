@@ -48,7 +48,7 @@ app.get("/get2randomcharacters", cors(), function (request, response) {
     });
 });
 
-app.get("/getrandomcharacter", function (request, response) {
+app.get("/getrandomcharacter", cors(), function (request, response) {
     mongodb.MongoClient.connect(urimongo, { useUnifiedTopology: true }, function (err, client) {
         if (err) console.log("error", err);
         else {
@@ -65,7 +65,7 @@ app.get("/getrandomcharacter", function (request, response) {
     console.log("getrandomchar really over ?");
 });
 
-app.post("/poll", cors(), function (request, response) {
+app.post("/poll", function (request, response) {
     //récupérer les données de la requête
     var body = request.body;
     //pousser en base de données
@@ -85,7 +85,7 @@ app.post("/poll", cors(), function (request, response) {
 
 
 //export de la base de données
-app.get("/exportdataset", function (request, response){
+app.get("/exportdataset", cors(), function (request, response){
     mongodb.MongoClient.connect(urimongo, { useUnifiedTopology: true }, function (err, client) {
         if (err) console.log("error", err);
         else {
